@@ -43,26 +43,26 @@ RAM uint8_t display_cmp_buff[LCD_BUF_SIZE];
    Sunday       Monday     Tuesday  Wednesday  Thursday  Friday   Saturday
     4.5          4.6         4.7       4.3       4.2      4.1       4.0
 
-      --6.0--         --6.4--               --7.4--         --8.4--
+      --5.0--         --6.0--               --7.0--         --8.0--
     |         |     |         |           |         |     |         |
-   5.4       5.5   5.1       6.5      /  6.1       7.5   7.1       8.5
+   5.5       5.1   6.5       6.1      /  7.5       7.1   8.5       8.1
     |         |     |         |      /    |         |     |         |
-      --5.6--         --5.2--      5.0      --6.2--         --7.2--
+      --5.6--         --6.6--      6.4      --7.6--         --8.6--
     |         |     |         |    /      |         |     |         |
-   6.0       5.7   5.3       6.6  /      6.3       7.6   7.3       8.6
+   5.7       5.2   6.7       6.2  /      7.7       7.2   8.7       8.2
     |         |     |         |           |         |     |         |
-      --6.0--         --6.7--               --7.7--         --8.7--
+      --5.3--         --6.3--               --7.3--         --8.3--
 
 
       --9.4--         -10.4--      10.0      -11.4--           -12.4--      o 9.0
     |         |     |         |     o      |         |       |         |      +--- 9.0
-   8.1       9.5   9.1      10.5         10.1      11.5    11.1      12.5     |
-    |         |     |         |    10.0    |         |       |         |      ---- 8.0
-      --8.2--         --9.2--       o        -10.2--           -11.2--        |
+   8.4       9.5   9.1      10.5         10.1      11.5    11.1      12.5     |
+    |         |     |         |    10.0    |         |       |         |      ---- 7.4
+      --9.6--         --9.2--       o        -10.2--           -11.2--        |
     |         |     |         |            |         |       |         |      |
-   8.3       9.6   9.3      10.6         10.3      11.6    11.3      12.6    7.0
+   9.4       9.7   9.3      10.6         10.3      11.6    11.3      12.6    5.4
     |         |     |         |            |         |   *   |         |
-      --9.7--         -10.7--                -11.7--    11.0   -12.7--
+      --9.4--         -10.7--                -11.7--    11.0   -12.7--
 
 
           -13.4--         -14.4--            -15.4--       o 15.0
@@ -134,14 +134,14 @@ const uint8_t sb_s1[4][DEF_MJWSD05MMC_SUMBOL_SIGMENTS*2] = {
 const uint8_t sb_dnd[7] = {0x20, 0x40, 0x80, 0x08, 0x04, 0x02, 0x01};
 
 const uint8_t sb_s2[4][DEF_MJWSD05MMC_SUMBOL_SIGMENTS*2] = {
-		{6,0x01, 5,0x20, 5,0x80, 6,0x01, 6,0x01, 5,0x10, 5,0x40},
-		{6,0x10, 6,0x20, 6,0x40, 6,0x80, 5,0x08, 5,0x02, 5,0x04},
+		{5,0x01, 5,0x02, 5,0x04, 5,0x08, 5,0x80, 5,0x20, 5,0x40},
+		{6,0x01, 6,0x02, 6,0x04, 6,0x08, 6,0x80, 6,0x20, 6,0x40},
 		// "/" 5,0x01
-		{7,0x10, 7,0x20, 7,0x40, 7,0x80, 6,0x08, 6,0x02, 6,0x04},
-		{8,0x10, 8,0x20, 8,0x40, 8,0x80, 7,0x08, 7,0x02, 7,0x04}
+		{7,0x01, 7,0x02, 7,0x04, 7,0x08, 7,0x80, 7,0x20, 7,0x40},
+		{8,0x01, 8,0x02, 8,0x04, 8,0x08, 8,0x80, 8,0x20, 8,0x40}
 };
 const uint8_t sb_s3[4][DEF_MJWSD05MMC_SUMBOL_SIGMENTS*2] = {
-		{9,0x10, 9,0x20, 9,0x40, 9,0x80, 8,0x08, 8,0x02, 8,0x04},
+		{9,0x10, 9,0x20, 9,0x80, 9,0x10, 9,0x10, 8,0x10, 9,0x40},
 		{10,0x10, 10,0x20, 10,0x40, 10,0x80, 9,0x08, 9,0x02, 9,0x04},
 		// ":" 10,0x01
 		{11,0x10, 11,0x20, 11,0x40, 11,0x80, 10,0x08, 10,0x02, 10,0x04},
@@ -302,23 +302,23 @@ void show_symbol_s3(uint8_t symbol) {
 /* o 9.0
     +--- 9.0
     |
-    ---- 8.0
+    ---- 7.4
     |
     |
-   7.0
+   5.4
  */
 	if (symbol & 1)
 		display_buff[9] |= BIT(0); // "°г"
 	else
 		display_buff[9] &= ~BIT(0); // "°г"
 	if (symbol & 2)
-		display_buff[8] |= BIT(0); //"-"
+		display_buff[7] |= BIT(4); //"-"
 	else
-		display_buff[8] &= ~BIT(0); //"-"
+		display_buff[7] &= ~BIT(4); //"-"
 	if (symbol & 4)
-		display_buff[7] |= BIT(0); // "|"
+		display_buff[5] |= BIT(4); // "|"
 	else
-		display_buff[7] &= ~BIT(0); // "|"
+		display_buff[5] &= ~BIT(4); // "|"
 	if (symbol & 0x10)
 		display_buff[10] |= BIT(0); // ":"
 	else
@@ -406,15 +406,15 @@ static void clear_s1(void) {
 }
 
 static void clear_s2(void) {
-	display_buff[5] = 0;
+	display_buff[5] &= BIT(4); // s3: "|"
 	display_buff[6] = 0;
-	display_buff[7] &= BIT(0); // "i" от "°F"
-	display_buff[8] &= ~(BIT(4) | BIT(5) | BIT(6) | BIT(7)); // "-" от "°F" + s3
+	display_buff[7] &= BIT(4); // s3: "-"
+	display_buff[8] &= BIT(4); // s3
 }
 
 static void clear_s3(void) {
-	display_buff[7] &= ~(BIT(0)); // "i" от "°F"
-	display_buff[8] &= ~(BIT(0) | BIT(1) | BIT(2) | BIT(3)); // "-" от "°F" + s2
+	display_buff[7] &= ~(BIT(4)); // "-" + s2
+	display_buff[8] &= ~(BIT(4)); // s3
 	display_buff[9] = 0; // "°F"
 	display_buff[10] = 0; // ":"
 	display_buff[11] = 0;
@@ -575,35 +575,35 @@ void show_s1_number_x10(int32_t number, uint8_t atr){
 }
 
 
-/* number in 0.1 (-9995..99995) show: -999..-99.9..999.9..9999 */
+/* number in 0.1 (-9995..29995) show: -999..-99.9..299.9..2999 */
 void show_s3_number_x10(int32_t number, uint8_t atr){
 	clear_s3();
 	show_symbol_s3(atr);
-	if (number > 99995) {
+	if (number >= 29995) {
 		// "Hi"
-		display_buff[8] |= BIT(1) | BIT(2) | BIT(3);
-		display_buff[9] |= BIT(3) | BIT(5) | BIT(6);
-	} else if (number < -9995) {
+		display_buff[10] |= BIT(1) | BIT(2) | BIT(3);
+		display_buff[11] |= BIT(3) | BIT(5) | BIT(6);
+	} else if (number <= -9995) {
 		// "Lo"
-		display_buff[8] |= BIT(1) | BIT(3);
-		display_buff[9] |= BIT(2) | BIT(3) | BIT(7);
-		display_buff[10] |= BIT(6) | BIT(7);
+		display_buff[10] |= BIT(1) | BIT(3);
+		display_buff[11] |= BIT(2) | BIT(3) | BIT(7);
+		display_buff[12] |= BIT(6) | BIT(7);
 	} else {
-		if (number > 9999 || number < -999) {
-			// no point, show: -999..9999
+		if (number > 2999 || number < -999) {
+			// no point, show: -999..2999
 			if (number < 0){
 				number = -number;
-				display_buff[8] |= BIT(2); // "-"
+				display_buff[9] |= BIT(6); // "-"
 			}
 			number = (number + 5) / 10; // round(div 10)
-		} else { // show: -99.9..999.9
+		} else { // show: -99.9..299.9
 			display_buff[11] |= BIT(0); // point
 			if (number < 0){
 				number = -number;
-				display_buff[8] |= BIT(2); // "-"
+				display_buff[9] |= BIT(6); // "-"
 			}
 		}
-		/* number: -999..9999 */
+		/* number: -999..2999 */
 		if (number > 999) lcd_set_digit(display_buff, number / 1000 % 10, sb_s3[0]);
 		if (number > 99) lcd_set_digit(display_buff, number / 100 % 10, sb_s3[1]);
 		if (number > 9) lcd_set_digit(display_buff, number / 10 % 10, sb_s3[2]);
@@ -717,7 +717,7 @@ void show_clock_s1(void) {
 void show_data_s2(void) {
 	uint8_t mh, ml, dh, dl;
 	clear_s2();
-	display_buff[5] = BIT(0); // "/"
+	display_buff[6] = BIT(4); // "/"
 
 	display_buff[4] &= BIT(4); // s1: "1"
 	display_buff[4] |= sb_dnd[rtc.weekday];

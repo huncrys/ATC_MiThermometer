@@ -93,7 +93,7 @@ RAM uint8_t my_SerialStr[20]; // "556202-C86013-123456"
 #if DEVICE_TYPE == DEVICE_MJWSD05MMC
 static const u8 my_ModelStr[] = {"MJWSD05MMC"};
 RAM u8 my_HardStr[4];// = {"V2.3"}
-RAM u8 my_SerialStr[20]; // = {"F2.0-CFMK-LB-TMDZ---"}
+RAM u8 my_SerialStr[20]; // = {"F2.0-JY-LB-TMDZ-HW--"}
 static const u8 my_SoftStr[] = {'V','0'+(VERSION>>4),'.','0'+(VERSION&0x0f)}; // "0026"
 static const u8 my_ManStr[] = {"miaomiaoce.com"};
 

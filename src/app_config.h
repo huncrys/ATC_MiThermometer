@@ -649,8 +649,7 @@ extern "C" {
   0x76000 MAC address (CFG_ADR_MAC)
   0x77000 Customize freq_offset adjust cap value (CUST_CAP_INFO_ADDR)
   0x78000 Mijia key-code
-  0x7D000 Ver+SerialStr: "V2.3F2.0-CFMK-LB-TMDZ---"
-  0x7E000 ? 5A 07 00 02 CE 0C 5A 07 00 02 CB 0C 5A 07 00 02 CD 0C
+  0x7D000 Ver+SerialStr: "V2.3F2.0-JY-LB-TMDZ-HW--"
   0x80000 End Flash (FLASH_SIZE)
  */
 
